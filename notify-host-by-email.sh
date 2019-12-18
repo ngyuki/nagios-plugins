@@ -3,14 +3,15 @@
 <<__COMMENT__
 define command {
     command_name    notify-host-by-email
-    command_line    URL="http://example.com/nagios/" \
+    command_line    FOOTER="Nagios: http://example.com/nagios/" \
                     FROM="$CONTACTADDRESS1$" \
                     CONTACTEMAIL="$CONTACTEMAIL$" \
                     HOSTADDRESS="$HOSTADDRESS$" \
                     HOSTALIAS="$HOSTALIAS$" \
                     HOSTOUTPUT="$HOSTOUTPUT$" \
+                    LONGHOSTOUTPUT="$LONGHOSTOUTPUT$" \
                     HOSTSTATE="$HOSTSTATE$" \
-                    LONGDATETIME="$LONGDATETIME$" \
+                    SHORTDATETIME="$SHORTDATETIME$" \
                     NOTIFICATIONTYPE="$NOTIFICATIONTYPE$" \
                     /etc/nagios/scripts/notify-host-by-email.sh
 }
@@ -24,15 +25,16 @@ __COMMENT__
 ***** Nagios *****
 
 Notification Type: $NOTIFICATIONTYPE
-
 Host: $HOSTALIAS
 State: $HOSTSTATE
 Address: $HOSTADDRESS
-Info: $HOSTOUTPUT
+Date/Time: $SHORTDATETIME
 
-Date/Time: $LONGDATETIME
+Additional Info:
+
+$HOSTOUTPUT
+$LONGHOSTOUTPUT
 
 --
-
-Nagios: $URL
+$FOOTER
 EOS
